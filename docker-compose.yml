@@ -13,6 +13,7 @@ services:
     # the PostgreSQL Docker Container use Environment Variables to read Configurations
 
 
+
     environment:
       POSTGRES_PASSWORD: chang3m!
 
