@@ -1,8 +1,18 @@
 services:
   db:
+    ## specifying the docker <image>:<version>
     image: postgres:latest
+
+    #mapping host's port -> container's port
     ports:
-      - "5431:5431"
-    restart: always
+      - "5433:5432"
+
+    # if we acceidentally kill the running container, Docker Compose will restart it
+    restart:
+      always
+    # the PostgreSQL Docker Container use Environment Variables to read Configurations
+
+
     environment:
-      POSTGRES_PASSWORD: postuser021
+      POSTGRES_PASSWORD: chang3m!
+
