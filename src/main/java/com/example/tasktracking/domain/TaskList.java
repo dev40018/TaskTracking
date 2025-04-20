@@ -1,6 +1,7 @@
 package com.example.tasktracking.domain;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,6 +9,11 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "t_tasks_list")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
 public class TaskList {
 
     @Id
