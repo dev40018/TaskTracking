@@ -4,12 +4,14 @@ import com.example.tasktracking.domain.TaskList;
 import com.example.tasktracking.domain.dto.TaskListDto;
 import com.example.tasktracking.domain.mapper.TaskListMapper;
 import com.example.tasktracking.service.TaskListService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/task-list")
 public class TaskListController {
@@ -36,6 +38,20 @@ public class TaskListController {
     @GetMapping("/{id}")
     public Optional<TaskListDto> getTaskList(@PathVariable("id") UUID id){
         return taskListService.getTaskList(id).map(taskListMapper::toDto);
+    }
+    @PutMapping("/{id}")
+    public TaskListDto updateTaskList(
+            @PathVariable("id") UUID taskListId,
+            @RequestBody TaskListDto taskListDto){
+        log.info(" {} ", taskListDto.id());
+        TaskList taskList = taskListMapper.fromDto(taskListDto);
+        log.info(" {} ", taskList.getId());
+        TaskList updateTaskList =  taskListService.updateTaskList(taskListId, taskList);
+        return taskListMapper.toDto(updateTaskList);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteTaskListById(@PathVariable("id") UUID taskListId){
+        taskListService.deleteTaskListById(taskListId);
     }
 
 

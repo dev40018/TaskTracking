@@ -12,10 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class TaskListMapperImp implements TaskListMapper {
+public class TaskListMapperImpl implements TaskListMapper {
     private final TaskMapper taskMapper;
 
-    public TaskListMapperImp(TaskMapper taskMapper) {
+    public TaskListMapperImpl(TaskMapper taskMapper) {
         this.taskMapper = taskMapper;
     }
 
@@ -51,10 +51,13 @@ public class TaskListMapperImp implements TaskListMapper {
     }
     private Double calculateTaskListProgress(List<Task> tasks) {
         //isEmpty instead of null because we are referencing to an empty object,
-        if (tasks.isEmpty()) {
-            return null;
+        if (null == tasks){
+            return  null;
         }
         long closedTasksCount = tasks.stream().filter(task -> TaskStatus.CLOSED == task.getStatus()).count();
+        if(closedTasksCount == 0L){
+            return null;
+        }
         return (double) (closedTasksCount / tasks.size());
     }
 }
