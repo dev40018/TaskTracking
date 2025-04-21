@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class TaskListServiceImpl implements TaskListService {
     private final TaskListRepository taskListRepository;
@@ -37,5 +40,10 @@ public class TaskListServiceImpl implements TaskListService {
                 LocalDateTime.now(),
                 null
                 ));
+    }
+
+    @Override
+    public Optional<TaskList> getTaskList(UUID taskListId) {
+        return taskListRepository.findById(taskListId);
     }
 }
