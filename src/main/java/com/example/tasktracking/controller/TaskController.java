@@ -7,6 +7,7 @@ import com.example.tasktracking.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -31,6 +32,14 @@ public class TaskController {
     ){
         Task createdTask = taskService.createTask(taskListId, taskMapper.fromDto(taskDto));
         return taskMapper.toDto(createdTask);
+
+    }
+    @GetMapping("/{task_id}")
+    public Optional<TaskDto> getTaskById(
+            @PathVariable("task_list_id") UUID taskListId,
+            @PathVariable("task_id") UUID taskId
+    ){
+       return taskService.getTaskById(taskListId, taskId).map(taskMapper::toDto);
 
     }
 
