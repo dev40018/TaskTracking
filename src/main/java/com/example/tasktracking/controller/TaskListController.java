@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/task-list")
+@RequestMapping("/api/v1/task_list")
 public class TaskListController {
     private final TaskListService taskListService;
     private final TaskListMapper taskListMapper;
@@ -43,9 +43,9 @@ public class TaskListController {
     public TaskListDto updateTaskList(
             @PathVariable("id") UUID taskListId,
             @RequestBody TaskListDto taskListDto){
-        log.info(" {} ", taskListDto.id());
+
         TaskList taskList = taskListMapper.fromDto(taskListDto);
-        log.info(" {} ", taskList.getId());
+
         TaskList updateTaskList =  taskListService.updateTaskList(taskListId, taskList);
         return taskListMapper.toDto(updateTaskList);
     }
@@ -53,6 +53,5 @@ public class TaskListController {
     public void deleteTaskListById(@PathVariable("id") UUID taskListId){
         taskListService.deleteTaskListById(taskListId);
     }
-
 
 }
